@@ -102,7 +102,7 @@ foreach ($arch in @("arm64", "x64")) {
     if ($LASTEXITCODE -ne 0) { throw "apiproxy patch failed for $arch" }
 
     # 6) zip (keep unix permissions)
-    $zipOut = Join-Path $outDir "DSHD-$arch.zip"
+    $zipOut = Join-Path $outDir "DSHD-mac-$arch.zip"
     node (Join-Path $root "make-mac-zip.js") $dir $zipOut
     if ($LASTEXITCODE -ne 0) { throw "zip failed for $arch" }
     Write-Host "done: $zipOut"

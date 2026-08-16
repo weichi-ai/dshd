@@ -48,8 +48,8 @@
 |---|---|---|
 | Windows | `DSHD-setup-win-x64.exe` | 安装向导，开始菜单/桌面快捷方式启动 |
 | Windows | `鲸彩世界DSHD`（免安装版） | 解压即用，直接运行 `鲸彩世界DSHD.exe` |
-| macOS | `DSHD-arm64.zip` | Apple Silicon（M 系列芯片） |
-| macOS | `DSHD-x64.zip` | Intel |
+| macOS | `DSHD-mac-arm64.zip` | Apple Silicon（M 系列芯片） |
+| macOS | `DSHD-mac-x64.zip` | Intel |
 
 ## 🚀 快速开始
 
@@ -59,7 +59,7 @@
 
 > macOS 未签名版本首次打开请 **右键 → 打开**，并执行一次：
 > ```bash
-> xattr -dr com.apple.quarantine /Applications/鲸彩世界DSHD.app
+> xattr -dr com.apple.quarantine /Applications/DSHD.app
 > ```
 
 ## 🖼 界面预览
