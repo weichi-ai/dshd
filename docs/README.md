@@ -14,8 +14,11 @@ npx serve .
 
 ## 部署到 GitHub Pages
 
-1. 把 `dshd-website` 目录内容推送到仓库（或作为仓库根目录）
-2. 仓库 Settings → Pages → Source 选择分支部署即可
+本目录已作为仓库 `docs/` 发布（Settings → Pages → Deploy from branch: main, folder: /docs），线上地址：
+
+https://weichi-ai.github.io/dshd/
+
+更新网站内容后推送到 main 分支即可自动重新构建。
 
 ## 替换占位内容
 
