@@ -1,0 +1,31 @@
+{
+  "name": "dsh-welcome",
+  "version": "0.1.0",
+  "description": "鲸彩世界DSHD welcome splash: animated colorful whale + intro copy + '开启鲸彩之旅' CTA. Shows once on first launch, re-enable from Settings -> General.",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "lib"
+  ],
+  "dsh": {
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-api-remotes"
+      ],
+      "platform": "web"
+    }
+  },
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  }
+}

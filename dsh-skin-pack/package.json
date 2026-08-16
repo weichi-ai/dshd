@@ -1,0 +1,31 @@
+{
+  "name": "dsh-skin-pack",
+  "version": "0.1.0",
+  "description": "DSHD preset skin pack: 7 built-in skins (midnight/nord/sepia/violet/cartoon/cute + deepseek default) with live preview and one-click apply, plus a reserved custom slot.",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "lib"
+  ],
+  "dsh": {
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-api-remotes"
+      ],
+      "platform": "web"
+    }
+  },
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  }
+}

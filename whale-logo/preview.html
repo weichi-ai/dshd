@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeepSeek 鲸鱼 · 彩色版预览</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif; background: #0b0f1a; color: #e5e9f2; padding: 40px 24px; }
+  h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+  .sub { color: #8b93a7; font-size: 13px; margin-bottom: 28px; }
+  .row { display: flex; gap: 24px; flex-wrap: wrap; margin-bottom: 32px; }
+  .card { background: #12182b; border: 1px solid #1f2a4a; border-radius: 14px; padding: 18px; flex: 1; min-width: 300px; }
+  .card h2 { font-size: 14px; color: #aeb6c9; margin-bottom: 14px; font-weight: 500; }
+  .panel { border-radius: 10px; padding: 26px; display: flex; align-items: center; justify-content: center; min-height: 260px; }
+  .panel.light { background: #f2f4f8; }
+  .panel.dark  { background: #0a1430; }
+  .panel img { max-width: 100%; max-height: 240px; }
+  .tag { display: inline-block; font-size: 11px; color: #7dd3fc; background: #0e2a45; border-radius: 999px; padding: 2px 10px; margin-right: 6px; }
+  .foot { color: #5c6478; font-size: 12px; margin-top: 20px; line-height: 1.8; }
+  code { background: #1a2340; padding: 1px 6px; border-radius: 4px; font-size: 12px; }
+</style>
+</head>
+<body>
+  <h1>🐋 DeepSeek 鲸鱼 Logo · 彩色版</h1>
+  <div class="sub">形状 100% 使用官方矢量路径（未做任何改动），仅将官方蓝 <code>#4D6BFE</code> 替换为多彩渐变（青 → 蓝 → 紫 → 粉）</div>
+
+  <div class="row">
+    <div class="card">
+      <h2><span class="tag">官方原版</span> 单色蓝 #4D6BFE</h2>
+      <div class="panel light"><img src="reference/favicon-api-docs.svg" alt="official"></div>
+    </div>
+    <div class="card">
+      <h2><span class="tag">彩色版 · 透明底</span> deepseek-whale-colorful.svg</h2>
+      <div class="panel light"><img src="deepseek-whale-colorful.svg" alt="colorful"></div>
+    </div>
+    <div class="card">
+      <h2><span class="tag">彩色版 · 深色底</span></h2>
+      <div class="panel dark"><img src="deepseek-whale-colorful.svg" alt="colorful dark"></div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="card">
+      <h2><span class="tag">App 图标风格</span> deepseek-whale-icon.svg（1024×1024）</h2>
+      <div class="panel light"><img src="deepseek-whale-icon.png" alt="icon"></div>
+    </div>
+    <div class="card">
+      <h2><span class="tag">白底图标版</span> deepseek-whale-icon-white.svg（1024×1024）</h2>
+      <div class="panel light"><img src="deepseek-whale-icon-white.png" alt="white icon"></div>
+    </div>
+    <div class="card">
+      <h2><span class="tag">三图对比</span> 官方 | 彩色 | 图标</h2>
+      <div class="panel light"><img src="comparison.png" alt="comparison"></div>
+    </div>
+  </div>
+
+  <div class="foot">
+    渐变方向：<code>头部（左下 青 #22D3EE）→ 身体（蓝 #3B82F6 / 紫 #8B5CF6）→ 尾部（右上 粉 #EC4899 → 玫红 #FB7185）</code><br>
+    交付文件：<code>deepseek-whale-colorful.svg</code>（透明底矢量）、<code>deepseek-whale-icon.svg</code>（深色 App 图标）、<code>deepseek-whale-icon-white.svg</code>（白底图标）、对应 PNG 预览。
+  </div>
+</body>
+</html>

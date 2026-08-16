@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DeepSeek Harness 桌面版 · 鲸彩世界</title>
+<meta name="description" content="DeepSeek Harness 桌面版，为热爱探索的你而生。支持 Windows / macOS，开源免费。">
+<meta property="og:title" content="DeepSeek Harness 桌面版 · 鲸彩世界">
+<meta property="og:description" content="DeepSeek Harness Desktop for everyone. 为热爱探索的你而生。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%F0%9F%90%B3%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- ===== SVG 精灵图：小彩鲸 ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <linearGradient id="whaleBody" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#ff6b6b"/>
+      <stop offset="20%" stop-color="#ffa94d"/>
+      <stop offset="40%" stop-color="#ffd43b"/>
+      <stop offset="60%" stop-color="#69db7c"/>
+      <stop offset="80%" stop-color="#4dabf7"/>
+      <stop offset="100%" stop-color="#9775fa"/>
+    </linearGradient>
+    <linearGradient id="whaleTail" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#4dabf7"/>
+      <stop offset="100%" stop-color="#4d6bfe"/>
+    </linearGradient>
+    <g id="whale">
+      <!-- 尾鳍 -->
+      <path d="M30 58 Q18 46 5 42 Q14 52 17 60 Z" fill="url(#whaleTail)"/>
+      <path d="M30 66 Q18 78 5 82 Q14 72 17 64 Z" fill="url(#whaleTail)"/>
+      <!-- 身体（彩虹渐变） -->
+      <path d="M28 62 C28 34 70 22 120 24 C155 25 178 40 182 62 C185 78 172 92 148 96 C118 101 70 98 48 88 C33 81 28 72 28 62 Z" fill="url(#whaleBody)"/>
+      <!-- 肚皮 -->
+      <ellipse cx="100" cy="82" rx="50" ry="12" fill="#ffffff" opacity="0.55"/>
+      <!-- 胸鳍（扇动） -->
+      <g class="whale-fin">
+        <path d="M84 72 Q82 92 106 102 Q100 86 100 72 Z" fill="#4dabf7" opacity="0.9"/>
+      </g>
+      <!-- 眼睛 / 腮红 / 微笑 -->
+      <circle cx="150" cy="50" r="6.5" fill="#ffffff"/>
+      <circle cx="152" cy="51" r="3" fill="#1a1a2e"/>
+      <circle cx="153.5" cy="49" r="1.1" fill="#ffffff"/>
+      <circle cx="139" cy="57" r="4.5" fill="#ff8fa3" opacity="0.65"/>
+      <path d="M156 63 Q163 69 171 62" stroke="#1a1a2e" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <!-- 喷水 -->
+      <g class="whale-spout">
+        <circle cx="146" cy="24" r="2.4" fill="#a5e8ff"/>
+        <circle cx="139" cy="22" r="2" fill="#7ad7ff"/>
+        <circle cx="132" cy="24" r="1.7" fill="#a5e8ff"/>
+      </g>
+    </g>
+  </defs>
+</svg>
+
+<!-- ===== 导航栏 ===== -->
+<header class="nav">
+  <div class="nav-inner">
+    <a class="logo" href="#hero">
+      <img class="logo-whale" src="assets/img/deepseek-whale-colorful.svg" alt="DSHD">
+      <span class="logo-text">DSHD<span class="logo-sub">（DSHD=Deepseek Harness Desktop）</span></span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a class="nav-link" href="#download" data-i18n="nav.download">下载</a>
+      <a class="nav-link" href="#github" data-i18n="nav.github">GitHub</a>
+      <a class="nav-link" href="#community" data-i18n="nav.community">社区</a>
+      <button id="langBtn" class="lang-btn" type="button" aria-label="Switch language">EN</button>
+      <a class="btn btn-primary btn-sm" data-gh="releases" href="https://github.com/weichi-ai/dshd/releases" target="_blank" rel="noopener" data-i18n="nav.download">下载</a>
+    </nav>
+    <button id="navBtn" class="nav-btn" type="button" aria-label="Menu">☰</button>
+  </div>
+</header>
+
+<main>
+  <!-- ===== Hero 首屏 ===== -->
+  <section id="hero" class="hero">
+    <div class="hero-bg" aria-hidden="true">
+      <div class="glow glow-a"></div>
+      <div class="glow glow-b"></div>
+      <div id="bubbles" class="bubbles"></div>
+      <div class="swimmer s1"><div class="trail"></div><div class="bob"><svg class="whale-svg" viewBox="0 0 200 120"><use href="#whale" xlink:href="#whale"/></svg></div></div>
+      <div class="swimmer s2"><div class="trail"></div><div class="bob"><svg class="whale-svg" viewBox="0 0 200 120"><use href="#whale" xlink:href="#whale"/></svg></div></div>
+      <div class="swimmer s3"><div class="trail"></div><div class="bob"><svg class="whale-svg" viewBox="0 0 200 120"><use href="#whale" xlink:href="#whale"/></svg></div></div>
+      <div class="wave wave-a"></div>
+      <div class="wave wave-b"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="badge"><img class="badge-whale" src="assets/img/deepseek-whale-colorful.svg" alt="小彩鲸"> <span data-i18n="hero.badge">鲸彩世界</span></div>
+      <h1 class="hero-title">
+        <span class="grad-text">DeepSeek Harness</span>
+        <span class="title-sub" data-i18n="hero.title2">桌面版</span>
+      </h1>
+      <p class="tagline" data-i18n="hero.tagline">为热爱探索的你而生</p>
+      <p class="hero-sub" data-i18n="hero.sub">在本地优雅运行 DeepSeek 的能力，隐私安全、开箱即用，让每一次探索都轻松自在。</p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" data-gh="releases" href="https://github.com/weichi-ai/dshd/releases" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5.6 10.4 4.7v6.6H3V5.6Zm8.6-.9 9.4-1.1v7.7h-9.4V4.7ZM3 12.8h7.4v6.6L3 18.4v-5.6Zm8.6 0h9.4v7.7l-9.4-1.1v-6.6Z"/></svg>
+          <span data-i18n="hero.win">下载 Windows 版</span>
+        </a>
+        <a class="btn btn-ghost" data-gh="releases" href="https://github.com/weichi-ai/dshd/releases" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.35 12.9c0-2.5 2-3.7 2.05-3.8-1.1-1.6-2.9-1.85-3.5-1.85-1.5-.15-2.95.9-3.7.9-.75 0-1.9-.85-3.15-.85-1.6 0-3.1.95-3.95 2.4-1.7 2.95-.45 7.3 1.2 9.7.8 1.15 1.75 2.45 3 2.4 1.2-.05 1.65-.75 3.1-.75s1.85.75 3.1.75c1.3-.02 2.1-1.15 2.9-2.3.9-1.35 1.3-2.65 1.3-2.7-.05-.02-2.5-.95-2.5-3.75Zm-2.35-6.95c.65-.8 1.1-1.9.95-3-1.05.05-2.25.7-2.95 1.55-.6.7-1.15 1.85-1 2.95 1.2.1 2.35-.55 3-1.5Z"/></svg>
+          <span data-i18n="hero.mac">下载 macOS 版</span>
+        </a>
+      </div>
+      <p class="hero-meta" data-i18n="hero.meta">免费 · 开源 · 支持 Windows / macOS</p>
+      <div class="hero-app carousel" id="heroCarousel">
+        <div class="app-frame">
+          <div class="app-bar" aria-hidden="true"><span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span></div>
+          <div class="carousel-track" id="shotsTrack">
+            <figure class="slide">
+              <img src="assets/img/dshd-pics/opt/1.webp" alt="DSHD 欢迎页">
+              <figcaption class="slide-cap"><span data-i18n="shots.cap1">欢迎页 · 开启探索之旅</span></figcaption>
+            </figure>
+            <figure class="slide">
+              <img src="assets/img/dshd-pics/opt/2.webp" alt="DSHD 主页 · 深色模式">
+              <figcaption class="slide-cap"><span data-i18n="shots.cap2">主页 · 深色模式</span></figcaption>
+            </figure>
+            <figure class="slide">
+              <img src="assets/img/dshd-pics/opt/3.webp" alt="DSHD 主页 · 浅色模式">
+              <figcaption class="slide-cap"><span data-i18n="shots.cap3">主页 · 浅色模式</span></figcaption>
+            </figure>
+            <figure class="slide">
+              <img src="assets/img/dshd-pics/opt/4.webp" alt="DSHD 皮肤设置页">
+              <figcaption class="slide-cap"><span data-i18n="shots.cap4">皮肤设置 · 随心换装</span></figcaption>
+            </figure>
+          </div>
+          <button class="car-btn car-prev" id="carPrev" type="button" aria-label="Previous">‹</button>
+          <button class="car-btn car-next" id="carNext" type="button" aria-label="Next">›</button>
+        </div>
+        <div class="car-dots" id="carDots"></div>
+        <p class="shots-hint" data-i18n="shots.hint">💡 点击任意截图可查看大图</p>
+      </div>
+    </div>
+
+    <div class="scroll-hint" aria-hidden="true">
+      <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+  </section>
+
+  <!-- ===== 下载区 ===== -->
+  <section id="download" class="section">
+    <div class="section-head reveal">
+      <h2 data-i18n="dl.title">下载安装</h2>
+      <p data-i18n="dl.sub">选择你的平台，开启鲸彩之旅</p>
+    </div>
+    <div class="cards">
+      <article class="card reveal">
+        <div class="card-icon icon-win">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M3 5.6 10.4 4.7v6.6H3V5.6Zm8.6-.9 9.4-1.1v7.7h-9.4V4.7ZM3 12.8h7.4v6.6L3 18.4v-5.6Zm8.6 0h9.4v7.7l-9.4-1.1v-6.6Z"/></svg>
+        </div>
+        <h3 data-i18n="dl.win.title">Windows 安装包</h3>
+        <p class="card-desc" data-i18n="dl.win.desc">专为 Windows 打造的桌面体验，双击安装，即刻出发。</p>
+        <ul class="card-meta">
+          <li><b data-i18n="dl.ver">最新版本</b>：v1.0.0</li>
+          <li><b data-i18n="dl.req">系统要求</b>：<span data-i18n="dl.win.req">Windows 10 / 11 · 64 位</span></li>
+        </ul>
+        <p class="card-steps" data-i18n="dl.win.steps">① 下载 .exe 安装包&#10;② 双击运行，按提示完成安装&#10;③ 启动 DeepSeek Harness，开始探索</p>
+        <a class="btn btn-primary btn-block" data-gh="releases" href="https://github.com/weichi-ai/dshd/releases" target="_blank" rel="noopener">
+          <span data-i18n="dl.btn">前往 GitHub 下载</span>
+        </a>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-icon icon-mac">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M16.35 12.9c0-2.5 2-3.7 2.05-3.8-1.1-1.6-2.9-1.85-3.5-1.85-1.5-.15-2.95.9-3.7.9-.75 0-1.9-.85-3.15-.85-1.6 0-3.1.95-3.95 2.4-1.7 2.95-.45 7.3 1.2 9.7.8 1.15 1.75 2.45 3 2.4 1.2-.05 1.65-.75 3.1-.75s1.85.75 3.1.75c1.3-.02 2.1-1.15 2.9-2.3.9-1.35 1.3-2.65 1.3-2.7-.05-.02-2.5-.95-2.5-3.75Zm-2.35-6.95c.65-.8 1.1-1.9.95-3-1.05.05-2.25.7-2.95 1.55-.6.7-1.15 1.85-1 2.95 1.2.1 2.35-.55 3-1.5Z"/></svg>
+        </div>
+        <h3 data-i18n="dl.mac.title">macOS 安装包</h3>
+        <p class="card-desc" data-i18n="dl.mac.desc">为 macOS 精心打磨，拖拽安装，丝滑体验。</p>
+        <ul class="card-meta">
+          <li><b data-i18n="dl.ver">最新版本</b>：v1.0.0</li>
+          <li><b data-i18n="dl.req">系统要求</b>：<span data-i18n="dl.mac.req">macOS 12+ · Apple Silicon / Intel</span></li>
+        </ul>
+        <p class="card-steps" data-i18n="dl.mac.steps">① 下载 .dmg 安装包&#10;② 打开后将 App 拖入 Applications&#10;③ 启动 DeepSeek Harness，开始探索</p>
+        <a class="btn btn-primary btn-block" data-gh="releases" href="https://github.com/weichi-ai/dshd/releases" target="_blank" rel="noopener">
+          <span data-i18n="dl.btn">前往 GitHub 下载</span>
+        </a>
+      </article>
+    </div>
+    <p class="section-note reveal" data-i18n="dl.note">安装包托管在 GitHub Releases，点击后选择对应平台的最新版本即可。</p>
+  </section>
+
+  <!-- ===== GitHub / Star 引导 ===== -->
+  <section id="github" class="section section-alt">
+    <div class="section-head reveal">
+      <h2 data-i18n="gh.title">开源 · 点亮 Star</h2>
+      <p data-i18n="gh.sub">项目完全开源，欢迎 Star、Fork 与贡献</p>
+    </div>
+    <div class="gh-wrap">
+      <article class="repo-card reveal">
+        <div class="repo-head">
+          <span class="repo-name">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55 0-.27-.01-1.17-.02-2.12-3.2.7-3.87-1.36-3.87-1.36-.52-1.33-1.28-1.68-1.28-1.68-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.75 2.69 1.25 3.34.95.1-.74.4-1.25.72-1.53-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11.1 11.1 0 0 1 5.8 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.41-2.69 5.38-5.25 5.67.41.35.77 1.05.77 2.12 0 1.53-.01 2.76-.01 3.14 0 .3.2.66.8.55A11.51 11.51 0 0 0 23.5 12C23.5 5.65 18.35.5 12 .5Z"/></svg>
+            DSHD
+          </span>
+          <span id="starCount" class="pill star-count">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17l-5.7 3 1.2-6.4L2.8 9.2l6.4-.8L12 2.5z"/></svg>
+            <span data-i18n="gh.stars">Stars</span>
+            <b id="starCountNum">--</b>
+          </span>
+        </div>
+        <p class="repo-desc" data-i18n="gh.repoDesc">DeepSeek Harness 桌面版，为热爱探索的你而生。</p>
+        <code class="repo-url">github.com/weichi-ai/dshd</code>
+        <div class="repo-badges">
+          <span>MIT License</span><span>Windows / macOS</span><span>Open Source</span>
+        </div>
+        <a class="btn btn-primary btn-block" data-gh="repo" href="https://github.com/weichi-ai/dshd" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5l2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17l-5.7 3 1.2-6.4L2.8 9.2l6.4-.8L12 2.5z"/></svg>
+          <span data-i18n="gh.btn">去 GitHub 点亮 Star ⭐</span>
+        </a>
+      </article>
+
+      <ol class="steps reveal">
+        <li>
+          <span class="step-num">1</span>
+          <div>
+            <b data-i18n="gh.step1.t">打开项目主页</b>
+            <p data-i18n="gh.step1.d">点击左侧按钮，进入 DSHD 的 GitHub 仓库</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">2</span>
+          <div>
+            <b data-i18n="gh.step2.t">点击右上角 Star</b>
+            <p data-i18n="gh.step2.d">在仓库页面右上角找到 ⭐ Star 按钮，轻轻一点</p>
+          </div>
+        </li>
+        <li>
+          <span class="step-num">3</span>
+          <div>
+            <b data-i18n="gh.step3.t">收藏成功</b>
+            <p data-i18n="gh.step3.d">你的支持是我们最大的动力，更新第一时间送达</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ===== 社区 ===== -->
+  <section id="community" class="section">
+    <div class="section-head reveal">
+      <h2 data-i18n="cm.title">加入社区</h2>
+      <p data-i18n="cm.sub">与志同道合的探索者一起交流成长</p>
+    </div>
+    <div class="cards cards-three">
+      <article class="card reveal">
+        <div class="card-icon icon-qq">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4C6.5 4 2.5 7.4 2.5 11.5c0 2.3 1.2 4.3 3.2 5.6L4.5 20l3.4-1.5c1.3.4 2.7.6 4.1.6 5.5 0 9.5-3.4 9.5-7.6S17.5 4 12 4Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/><circle cx="9" cy="11.3" r="1.3" fill="currentColor"/><circle cx="15" cy="11.3" r="1.3" fill="currentColor"/></svg>
+        </div>
+        <h3 data-i18n="cm.qq.t">QQ 交流群</h3>
+        <p class="card-desc" data-i18n="cm.qq.d">和同好们畅聊使用心得与探索故事</p>
+        <div class="qr">
+          <img src="assets/qr/qq.jpg" alt="QQ 群二维码" onerror="this.classList.add('hidden');this.nextElementSibling.classList.remove('hidden')">
+          <div class="qr-ph hidden">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M14 14h2.5v2.5H14zM17.5 14H20v2.5h-2.5zM14 17.5h2.5V20H14zM17.5 17.5H20V20h-2.5z" fill="currentColor"/></svg>
+            <span data-i18n="cm.qq.qr">二维码占位&#10;请将图片放到 assets/qr/qq.jpg</span>
+          </div>
+        </div>
+        <p class="qq-num"><span data-i18n="cm.qq.num">群号：</span><b>929082451</b></p>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-icon icon-wx">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M9 4C4.9 4 1.5 6.8 1.5 10.2c0 1.9 1 3.6 2.6 4.8l-.7 2.4 2.8-1.2c.9.3 1.9.4 2.8.4h.3c-.1-.4-.1-.8-.1-1.2 0-3.5 3.1-6.3 7-6.3h.4C16.2 6 13 4 9 4Zm3.9 2.4c.6 0 1.1.5 1.1 1.1s-.5 1.1-1.1 1.1-1.1-.5-1.1-1.1.5-1.1 1.1-1.1Zm-5.6 0c.6 0 1.1.5 1.1 1.1s-.5 1.1-1.1 1.1-1.1-.5-1.1-1.1.5-1.1 1.1-1.1Zm7.4 4.3c-2.5 0-4.5 1.6-4.5 3.7 0 2 2 3.7 4.5 3.7.7 0 1.4-.1 2-.4l1.7.7-.4-1.5c1.2-.8 1.9-1.9 1.9-3.1 0-2-2-3.4-4.5-3.4Zm-1.4 2c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7Zm2.9 0c.4 0 .7.3.7.7s-.3.7-.7.7-.7-.3-.7-.7.3-.7.7-.7Z"/></svg>
+        </div>
+        <h3 data-i18n="cm.wx.t">微信群</h3>
+        <p class="card-desc" data-i18n="cm.wx.d">扫码进群，与鲸彩世界的朋友们相遇</p>
+        <div class="qr">
+          <img src="assets/qr/wechat.png" alt="微信群二维码" onerror="this.classList.add('hidden');this.nextElementSibling.classList.remove('hidden')">
+          <div class="qr-ph hidden">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4z" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M14 14h2.5v2.5H14zM17.5 14H20v2.5h-2.5zM14 17.5h2.5V20H14zM17.5 17.5H20V20h-2.5z" fill="currentColor"/></svg>
+            <span data-i18n="cm.wx.qr">二维码占位&#10;请将图片放到 assets/qr/wechat.png</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card reveal">
+        <div class="card-icon icon-mail">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 data-i18n="cm.mail.t">邮箱联系</h3>
+        <p class="card-desc" data-i18n="cm.mail.d">反馈建议、合作洽谈，欢迎来信</p>
+        <a class="btn btn-ghost btn-block" href="mailto:2078580136@qq.com">
+          <span data-i18n="cm.mail.btn">发送邮件</span>
+        </a>
+        <code class="repo-url">2078580136@qq.com</code>
+      </article>
+    </div>
+  </section>
+</main>
+
+<!-- ===== 页脚 ===== -->
+<footer class="footer">
+  <img class="footer-whale" src="assets/img/deepseek-whale-colorful.svg" alt="小彩鲸" aria-hidden="true">
+  <p class="footer-tag" data-i18n="ft.tag">DeepSeek Harness Desktop for everyone</p>
+  <p class="footer-rights">© <span id="year">2025</span> DSHD Project · <span data-i18n="ft.rights">鲸彩世界</span></p>
+  <div class="footer-links">
+    <a data-gh="repo" href="https://github.com/weichi-ai/dshd" target="_blank" rel="noopener">GitHub</a>
+    <a data-gh="releases" href="https://github.com/weichi-ai/dshd/releases" target="_blank" rel="noopener">Releases</a>
+    <a href="mailto:2078580136@qq.com">Email</a>
+  </div>
+</footer>
+
+<!-- ===== Lightbox 大图浏览 ===== -->
+<div id="lightbox" class="lightbox" aria-hidden="true">
+  <button class="lb-close" id="lbClose" type="button" aria-label="Close">✕</button>
+  <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Previous">‹</button>
+  <figure class="lb-body">
+    <img id="lbImg" src="" alt="">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+  <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Next">›</button>
+</div>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>

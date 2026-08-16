@@ -1,0 +1,8 @@
+{
+  "name": "鲸彩世界DSHD",
+  "productName": "鲸彩世界DSHD",
+  "version": "1.0.0",
+  "main": "main.js",
+  "description": "鲸彩世界DSHD — DeepSeek Harness Desktop（基于 DeepSeek Harness 的桌面发行版）",
+  "private": true
+}
