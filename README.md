@@ -66,11 +66,11 @@
 
 | 欢迎页 | 主页 · 深色模式 |
 |---|---|
-| ![欢迎页](website/assets/img/dshd-pics/opt/1.webp) | ![深色主页](website/assets/img/dshd-pics/opt/2.webp) |
+| ![欢迎页](docs/assets/img/dshd-pics/opt/1.webp) | ![深色主页](docs/assets/img/dshd-pics/opt/2.webp) |
 
 | 主页 · 浅色模式 | 皮肤设置页 |
 |---|---|
-| ![浅色主页](website/assets/img/dshd-pics/opt/3.webp) | ![皮肤设置](website/assets/img/dshd-pics/opt/4.webp) |
+| ![浅色主页](docs/assets/img/dshd-pics/opt/3.webp) | ![皮肤设置](docs/assets/img/dshd-pics/opt/4.webp) |
 
 ## ⚙️ 使用
 
@@ -97,7 +97,7 @@ dshd/
 ├── dsh-welcome/    # 欢迎页插件（小彩鲸动画 + CTA）
 ├── dsh-skin-pack/  # 皮肤包插件（7 套内置皮肤 + 自定义槽位）
 ├── whale-logo/     # 品牌资源：小彩鲸 Logo 生成与前端补丁脚本
-└── website/        # 官网静态站（GitHub Pages 发布）
+└── docs/          # 官网静态站（GitHub Pages 发布）
 ```
 
 ### 构建
@@ -117,7 +117,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File dshd-package/build-mac.ps1
 
 ## 📦 官网
 
-官网（本仓库 `website/` 目录）部署于 GitHub Pages：
+官网（本仓库 `docs/` 目录）部署于 GitHub Pages：
 
 <p align="center"><a href="https://weichi-ai.github.io/dshd/">🌐 weichi-ai.github.io/dshd</a></p>
 

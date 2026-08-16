@@ -8,7 +8,7 @@ dshd-package/downloads/
 dshd-package/mac/
 
 # 原始大截图（页面引用压缩版 opt/*.webp）
-website/assets/img/dshd-pics/*.png
+docs/assets/img/dshd-pics/*.png
 
 # 系统文件
 .DS_Store
