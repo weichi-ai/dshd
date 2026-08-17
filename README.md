@@ -19,9 +19,11 @@
   <a href="#-社区">💬 社区</a>
 </p>
 
----
+<p align="center">
+  <b>简体中文</b> · <a href="README.en.md">English</a>
+</p>
 
-**English**: DSHD (DeepSeek Harness Desktop) is a desktop distribution of [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) with a bundled Node runtime and the `dsh` CLI — no Node.js or npm installation required. It ships with the *Whale Color World* welcome page and 7 built-in skins, keeps all your data local, and supports Windows & macOS. Free and open source.
+---
 
 ## 🐳 项目简介
 
