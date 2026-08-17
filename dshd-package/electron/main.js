@@ -37,6 +37,7 @@ if (!gotLock) {
 let mainWindow = null;
 let dshProc = null;
 let port = 0;
+let dshReady = false;
 
 function main() {
   app.on('second-instance', () => {
@@ -131,6 +132,10 @@ async function startDsh() {
   dshProc.on('error', (err) => dbg('dsh spawn error: ' + err.message));
   dshProc.on('exit', (code, signal) => {
     dbg('dsh exited code=' + code + ' signal=' + signal);
+    if (!dshReady) {
+      const logPath = path.join(app.getPath('userData'), 'dsh.log');
+      dialog.showErrorBox(APP_TITLE, `服务启动失败，请查看日志：\n${logPath}`);
+    }
     if (mainWindow && !mainWindow.isDestroyed()) mainWindow.destroy();
     app.exit(typeof code === 'number' ? code : 0);
   });
@@ -143,6 +148,7 @@ async function startDsh() {
     return false;
   }
   console.log('[dsh] ready at http://127.0.0.1:' + port);
+  dshReady = true;
   return true;
 }
 

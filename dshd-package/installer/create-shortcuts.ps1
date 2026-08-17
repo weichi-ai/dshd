@@ -1,5 +1,6 @@
 param(
     [Parameter(Mandatory = $true)][string]$Target,
+    [Parameter(Mandatory = $true)][string]$Icon,
     [Parameter(Mandatory = $true)][string]$StartMenuLink,
     [Parameter(Mandatory = $true)][string]$DesktopLink
 )
@@ -11,6 +12,6 @@ foreach ($link in @($StartMenuLink, $DesktopLink)) {
     $shortcut = $shell.CreateShortcut($link)
     $shortcut.TargetPath = $Target
     $shortcut.WorkingDirectory = Split-Path -Parent $Target
-    $shortcut.IconLocation = "$Target,0"
+    $shortcut.IconLocation = "$Icon,0"
     $shortcut.Save()
 }

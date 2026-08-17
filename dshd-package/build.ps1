@@ -153,12 +153,12 @@ Section "Main" SEC_MAIN
   File /r "@@OUTDIR@@\*.*"
   WriteUninstaller "$INSTDIR\uninstall.exe"
   CreateDirectory "$SMPROGRAMS\@@APP_NAME@@"
-  CreateShortcut "$SMPROGRAMS\@@APP_NAME@@\@@APP_NAME@@.lnk" "$INSTDIR\@@APP_EXE@@"
-  CreateShortcut "$DESKTOP\@@APP_NAME@@.lnk" "$INSTDIR\@@APP_EXE@@"
+  CreateShortcut "$SMPROGRAMS\@@APP_NAME@@\@@APP_NAME@@.lnk" "$INSTDIR\@@APP_EXE@@" "" "$INSTDIR\resources\app\assets\app.ico" 0
+  CreateShortcut "$DESKTOP\@@APP_NAME@@.lnk" "$INSTDIR\@@APP_EXE@@" "" "$INSTDIR\resources\app\assets\app.ico" 0
   InitPluginsDir
   SetOutPath "$PLUGINSDIR"
   File /oname=create-shortcuts.ps1 "@@SHORTCUT_SCRIPT@@"
-  nsExec::ExecToLog '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$PLUGINSDIR\create-shortcuts.ps1" "$INSTDIR\@@APP_EXE@@" "$SMPROGRAMS\@@APP_NAME@@\@@APP_NAME@@.lnk" "$DESKTOP\@@APP_NAME@@.lnk"'
+  nsExec::ExecToLog '"$SYSDIR\WindowsPowerShell\v1.0\powershell.exe" -NoProfile -NonInteractive -ExecutionPolicy Bypass -File "$PLUGINSDIR\create-shortcuts.ps1" "$INSTDIR\@@APP_EXE@@" "$INSTDIR\resources\app\assets\app.ico" "$SMPROGRAMS\@@APP_NAME@@\@@APP_NAME@@.lnk" "$DESKTOP\@@APP_NAME@@.lnk"'
   Pop $0
   DetailPrint "Shortcut fallback exit code: $0"
   SetOutPath "$INSTDIR"

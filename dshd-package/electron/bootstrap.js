@@ -26,6 +26,77 @@ const PROFILE_PKG = {
 
 const PLUGINS = ['dsh-skin-pack', 'dsh-welcome'];
 
+function packagePaths(nodeModules) {
+  const paths = [];
+  if (!fs.existsSync(nodeModules)) return paths;
+  for (const entry of fs.readdirSync(nodeModules, { withFileTypes: true })) {
+    if (entry.name.startsWith('.')) continue;
+    if (entry.name.startsWith('@') && entry.isDirectory()) {
+      const scope = path.join(nodeModules, entry.name);
+      for (const child of fs.readdirSync(scope, { withFileTypes: true })) {
+        if (child.isDirectory() || child.isSymbolicLink()) paths.push(path.join(entry.name, child.name));
+      }
+    } else if (entry.isDirectory() || entry.isSymbolicLink()) {
+      paths.push(entry.name);
+    }
+  }
+  return paths;
+}
+
+function samePath(a, b) {
+  const left = path.resolve(a);
+  const right = path.resolve(b);
+  return process.platform === 'win32' ? left.toLowerCase() === right.toLowerCase() : left === right;
+}
+
+// Old desktop builds left profile fallback links pointing into a previous
+// installation directory, and occasionally left a real package directory.
+// Repair every application-owned top-level package before dsh starts. Real
+// directories are moved to a recoverable backup; user-only plugins are not in
+// the bundled dependency list and are therefore left untouched.
+function repairFallbackLinks(dshHome, appPath) {
+  const sourceRoot = path.join(appPath, 'vendor', 'app', 'node_modules');
+  const profileRoot = path.join(dshHome, 'profiles', 'node_modules');
+  let backupRoot = null;
+  let repaired = 0;
+  let backedUp = 0;
+
+  for (const relative of packagePaths(sourceRoot)) {
+    const source = path.join(sourceRoot, relative);
+    const destination = path.join(profileRoot, relative);
+    fs.mkdirSync(path.dirname(destination), { recursive: true });
+
+    let stat = null;
+    try { stat = fs.lstatSync(destination); } catch (err) {
+      if (err.code !== 'ENOENT') throw err;
+    }
+    if (stat && stat.isSymbolicLink()) {
+      let currentTarget = null;
+      try { currentTarget = fs.readlinkSync(destination); } catch (err) { /* recreate below */ }
+      if (currentTarget && samePath(path.resolve(path.dirname(destination), currentTarget), source)) continue;
+      fs.unlinkSync(destination);
+    } else if (stat) {
+      if (!backupRoot) {
+        const stamp = new Date().toISOString().replace(/[:.]/g, '-');
+        backupRoot = path.join(dshHome, 'profiles', `node_modules-legacy-${stamp}`);
+      }
+      let backup = path.join(backupRoot, relative);
+      let suffix = 1;
+      while (fs.existsSync(backup)) backup = path.join(backupRoot, relative + '.' + suffix++);
+      fs.mkdirSync(path.dirname(backup), { recursive: true });
+      fs.renameSync(destination, backup);
+      backedUp++;
+    }
+
+    fs.symlinkSync(source, destination, process.platform === 'win32' ? 'junction' : 'dir');
+    repaired++;
+  }
+  if (repaired || backedUp) {
+    console.log(`[bootstrap] fallback repaired: ${repaired} links, ${backedUp} legacy entries backed up`);
+    if (backupRoot) console.log('[bootstrap] legacy backup: ' + backupRoot);
+  }
+}
+
 function ensure(dshHome, appPath) {
   const profiles = path.join(dshHome, 'profiles');
   fs.mkdirSync(path.join(profiles, 'web'), { recursive: true });
@@ -35,8 +106,7 @@ function ensure(dshHome, appPath) {
   fs.writeFileSync(pkgPath, JSON.stringify(PROFILE_PKG, null, 2) + '\n');
   fs.writeFileSync(path.join(profiles, 'web', 'cordis.patch.yml'), PATCH);
 
-  // 依赖树不需要播种：dsh 启动时（healProfilesModuleFallback）会自动在
-  // profiles\node_modules 建立指向应用依赖的符号链接（installation fallback）。
+  repairFallbackLinks(dshHome, appPath);
 
   // 插件同步（版本不同才替换；临时目录 + 原子 rename）
   const profileNodeModules = path.join(profiles, 'node_modules');
