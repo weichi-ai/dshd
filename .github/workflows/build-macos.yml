@@ -1,0 +1,55 @@
+name: Build macOS installers
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/build-macos.yml'
+      - 'dshd-package/**'
+      - 'dsh-skin-pack/**'
+      - 'dsh-welcome/**'
+      - 'whale-logo/**'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Application version
+        required: true
+        default: 1.0.0
+  push:
+    tags:
+      - 'v*'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-15
+            arch: arm64
+          - runner: macos-15-intel
+            arch: x64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Select version
+        id: version
+        shell: bash
+        run: |
+          if [[ "${GITHUB_REF_TYPE}" == "tag" ]]; then
+            echo "value=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=${{ inputs.version }}" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Build native package
+        shell: bash
+        run: bash dshd-package/build-mac.sh "${{ steps.version.outputs.value }}"
+      - name: Upload installers
+        uses: actions/upload-artifact@v4
+        with:
+          name: DSHD-${{ steps.version.outputs.value }}-mac-${{ matrix.arch }}
+          path: dshd-package/dist/mac-${{ matrix.arch }}/*
+          if-no-files-found: error
+          compression-level: 0

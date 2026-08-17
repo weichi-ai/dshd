@@ -11,7 +11,16 @@ const APP_TITLE = '鲸彩世界DSHD';
 const BOOTSTRAP = require('./bootstrap');
 
 // 调试日志（设置 DSDH_DEBUG_FILE 时写入文件，便于在沙箱/无控制台环境下排查）
-const debugLog = process.env.DSDH_DEBUG_FILE ? require('fs').createWriteStream(process.env.DSDH_DEBUG_FILE, { flags: 'a' }) : null;
+let debugLog = null;
+if (process.env.DSDH_DEBUG_FILE) {
+  try {
+    const fs = require('fs');
+    fs.mkdirSync(path.dirname(process.env.DSDH_DEBUG_FILE), { recursive: true });
+    debugLog = fs.createWriteStream(process.env.DSDH_DEBUG_FILE, { flags: 'a' });
+  } catch (err) {
+    console.error('[main] debug log disabled:', err);
+  }
+}
 const dbg = (msg) => {
   const line = `[main ${new Date().toISOString()}] ${msg}`;
   if (debugLog) debugLog.write(line + '\n');

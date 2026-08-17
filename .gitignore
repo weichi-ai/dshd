@@ -5,7 +5,6 @@ node_modules/
 # 构建产物（由 build.ps1 / build-mac.ps1 生成）
 dshd-package/dist/
 dshd-package/downloads/
-dshd-package/mac/
 
 # 原始大截图（页面引用压缩版 opt/*.webp）
 docs/assets/img/dshd-pics/*.png

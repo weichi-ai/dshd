@@ -32,8 +32,8 @@
 
 ## macOS 版
 
-- `鲸彩世界DSHD-arm64.zip`（Apple Silicon）/ `鲸彩世界DSHD-x64.zip`（Intel）
-- 解压后将 `鲸彩世界DSHD.app` 拖入「应用程序」。
+- `DSHD-1.0.0-mac-arm64.dmg`（Apple Silicon）/ `DSHD-1.0.0-mac-x64.dmg`（Intel）
+- 同时提供对应 ZIP；打开 DMG 后将 `鲸彩世界DSHD.app` 拖入「应用程序」。
 - 未签名：首次打开请**右键 → 打开**（或系统设置 → 隐私与安全性 → 仍要打开），并在终端执行一次：
 
 ```bash
@@ -42,7 +42,8 @@ xattr -dr com.apple.quarantine /Applications/鲸彩世界DSHD.app
 
 ## 开发者
 
-- 构建 Windows：`powershell -NoProfile -ExecutionPolicy Bypass -File build.ps1`（产物在 `dist\`）
-- 构建 macOS：`powershell -NoProfile -ExecutionPolicy Bypass -File build-mac.ps1`（需要网络下载 darwin 版 Electron/Node）
+- 构建 Windows：`powershell -NoProfile -ExecutionPolicy Bypass -File build.ps1 -CacheDir downloads`（Unicode NSIS 当前用户安装包 + 便携 ZIP）
+- 构建 macOS：必须在对应架构的 macOS 上运行 `bash build-mac.sh 1.0.0`；也可手动触发 `.github/workflows/build-macos.yml`
+- Windows 默认安装路径：`%LOCALAPPDATA%\Programs\DSHD`，主程序为 `DSHD.exe`，无需管理员权限；界面与快捷方式仍显示“鲸彩世界DSHD”
 - 品牌补丁：`whale-logo\patch-frontend.js`（前端标题/图标/鲸鱼渐变）
 - 插件源码：`dsh-skin-pack`（皮肤包）、`dsh-welcome`（欢迎页）
