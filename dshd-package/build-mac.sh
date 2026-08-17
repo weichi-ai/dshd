@@ -88,7 +88,21 @@ ditto -c -k --sequesterRsrc --keepParent "$APP" "$ZIP"
 mkdir -p "$WORK/dmg"
 cp -R "$APP" "$WORK/dmg/"
 ln -s /Applications "$WORK/dmg/Applications"
-hdiutil create -volname "DSHD $VERSION" -srcfolder "$WORK/dmg" -ov -format UDZO "$DMG"
+DMG_CREATED=0
+for ATTEMPT in 1 2 3; do
+  rm -f "$DMG"
+  if hdiutil create -volname "DSHD $VERSION" -srcfolder "$WORK/dmg" -ov -format UDZO "$DMG"; then
+    DMG_CREATED=1
+    break
+  fi
+  echo "hdiutil create attempt $ATTEMPT failed; retrying"
+  sync
+  sleep $((ATTEMPT * 5))
+done
+if [[ "$DMG_CREATED" != "1" ]]; then
+  echo "hdiutil create failed after 3 attempts" >&2
+  exit 1
+fi
 
 echo "== 8/8 checksums =="
 (cd "$DIST" && shasum -a 256 "$(basename "$ZIP")" "$(basename "$DMG")" > SHA256SUMS.txt)
