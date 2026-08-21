@@ -34,6 +34,7 @@ $patchFrontend = Join-Path $repoRoot "whale-logo\patch-frontend.js"
 $patchApiproxy = Join-Path $repoRoot "whale-logo\patch-apiproxy.js"
 $skinPlugin = Join-Path $repoRoot "dsh-skin-pack"
 $welcomePlugin = Join-Path $repoRoot "dsh-welcome"
+$aboutPlugin = Join-Path $repoRoot "dsh-about"
 $shortcutScript = Join-Path $root "installer\create-shortcuts.ps1"
 
 function Require-File([string]$path) {
@@ -48,7 +49,7 @@ function Extract-Zip([string]$zip, [string]$destination) {
 }
 
 foreach ($file in @($electronZip, $payloadZip, $nsisZip, $iconIco, $iconIcns, $patchFrontend, $patchApiproxy, $shortcutScript)) { Require-File $file }
-foreach ($dir in @($skinPlugin, $welcomePlugin)) { Require-Directory $dir }
+foreach ($dir in @($skinPlugin, $welcomePlugin, $aboutPlugin)) { Require-Directory $dir }
 
 Write-Host "== 1/9 clean output =="
 if (Test-Path -LiteralPath $dist) { Remove-Item -LiteralPath $dist -Recurse -Force }
@@ -78,6 +79,7 @@ Copy-Item (Join-Path $payload "app") (Join-Path $app "vendor\app") -Recurse
 New-Item -ItemType Directory -Path (Join-Path $app "vendor\plugins") -Force | Out-Null
 Copy-Item $skinPlugin (Join-Path $app "vendor\plugins\dsh-skin-pack") -Recurse -Exclude @("scripts")
 Copy-Item $welcomePlugin (Join-Path $app "vendor\plugins\dsh-welcome") -Recurse -Exclude @("scripts")
+Copy-Item $aboutPlugin (Join-Path $app "vendor\plugins\dsh-about") -Recurse -Exclude @("scripts")
 
 Write-Host "== 5/9 apply branding patches =="
 & node $patchFrontend (Join-Path $app "vendor\app\node_modules\@deepseek-ai\dsh-web-frontend\dist")

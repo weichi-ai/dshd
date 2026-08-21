@@ -112,9 +112,9 @@ async function startDsh() {
   }
   dbg('port ' + port + ' chosen; spawning dsh');
 
-  dshProc = spawn(nodeExe, [binJs, 'web', '--host', '127.0.0.1', '--port', String(port)], {
+  dshProc = spawn(nodeExe, [binJs, 'web', '--host', '127.0.0.1', '--port', String(port), '--no-open'], {
     cwd: os.homedir(),
-    env: process.env,
+    env: { ...process.env, DSH_APP_VERSION: app.getVersion() },
     stdio: ['ignore', 'pipe', 'pipe'],
     windowsHide: true
   });

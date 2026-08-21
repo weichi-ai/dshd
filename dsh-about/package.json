@@ -1,0 +1,31 @@
+{
+  "name": "dsh-about",
+  "version": "1.0.0",
+  "description": "DSHD 关于页：版本信息、更新日志、检查更新（对比 GitHub release）",
+  "type": "module",
+  "license": "MIT",
+  "files": [
+    "lib"
+  ],
+  "dsh": {
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-api-remotes"
+      ],
+      "platform": "web"
+    }
+  },
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  }
+}

@@ -16,6 +16,16 @@ if (!fs.existsSync(bak)) { fs.copyFileSync(apiproxy, bak); console.log('backup:'
 fs.copyFileSync(bak, apiproxy); // 幂等：从备份还原再打
 
 let js = fs.readFileSync(apiproxy, 'utf8');
+
+// dsh 0.1.1-rc.2 起，dsh-host-apiproxy 移除了浏览器侧
+// WEB_SETTINGS_NAMESPACES 白名单：settings.describe 直接返回 settings
+// provider 注册表里的全部命名空间（skin-pack / welcome 由插件自己
+// settings.register() 注册即可见），此补丁不再需要，检测到即跳过。
+if (!js.includes('web-search-deepseek') && js.includes('settingsNamespace')) {
+  console.log('obsolete: 0.1.1+ auto-exposes registered settings namespaces, no patch needed');
+  process.exit(0);
+}
+
 const needle = '\t"web-search-deepseek"\n];';
 const repl = '\t"web-search-deepseek",\n\t"skin-pack",\n\t"welcome"\n];';
 const count = js.split(needle).length - 1;

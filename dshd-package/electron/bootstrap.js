@@ -11,6 +11,8 @@ const PATCH = `# 鲸彩世界DSHD 插件层（应用首启自动维护，勿手�
       name: dsh-skin-pack
     - id: dsh-welcome
       name: dsh-welcome
+    - id: dsh-about
+      name: dsh-about
 `;
 
 const PROFILE_PKG = {
@@ -24,7 +26,7 @@ const PROFILE_PKG = {
   }
 };
 
-const PLUGINS = ['dsh-skin-pack', 'dsh-welcome'];
+const PLUGINS = ['dsh-skin-pack', 'dsh-welcome', 'dsh-about'];
 
 function packagePaths(nodeModules) {
   const paths = [];
